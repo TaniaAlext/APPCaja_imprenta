@@ -6,7 +6,7 @@
     android:padding="8dp">
 
     <SearchView
-        android:id="@+id/search_bar"
+        android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Buscar producto..."
@@ -75,5 +75,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Actualizar Inventario"/>
+
+    <Button
+        android:id="@+id/btnRegistrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registrar Usuario"/>
+
+    <TextView
+        android:id="@+id/txtConexion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Verificando conexión..."
+        android:textSize="18sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"/>
 
 </LinearLayout>
