@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,68 +13,17 @@
         android:hint="Buscar producto..."
         android:padding="10dp"
         android:background="@android:drawable/edit_text"
-        android:drawableLeft="@android:drawable/ic_menu_search"
         android:inputType="text" />
 
-
-    <!-- Cabecera Fija de la Tabla -->
-    <LinearLayout
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/btnAgregarProducto"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="#CCCCCC"
-        android:padding="8dp">
+        android:text="Agregar Nuevo Producto" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Clave"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:gravity="center"
-            android:textColor="#000000"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="Descripción"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:gravity="center"
-            android:textColor="#000000"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="SKU"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:gravity="center"
-            android:textColor="#000000"/>
-    </LinearLayout>
-
-
-    <!-- RecyclerView para los Datos -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@android:color/white"
-        android:scrollbars="vertical"/>
-    <Button
-        android:id="@+id/asignarSkuButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Asignar SKU"/>
-
-    <Button
-        android:id="@+id/actualizarInventarioButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Actualizar Inventario"/>
-
+        android:layout_marginTop="8dp" />
 </LinearLayout>
