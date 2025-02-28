@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private ProductoAdapter productoAdapter;
     private List<Producto> productoList;
     private ProgressBar progressBar;
-    private static final String URL_PRODUCTOS = "http://192.168.1.137:8080/app_m/mostrar.php"; // Ajusta según tu IP o API
+    private static final String URL_PRODUCTOS = "http://192.168.1.137:8080/app_m/mostrar.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

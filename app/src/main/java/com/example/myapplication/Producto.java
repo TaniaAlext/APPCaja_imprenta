@@ -11,7 +11,6 @@ public class Producto {
     private String subfamilia;
     private String estatus;
 
-    // Constructor con Long para idprod
     public Producto(String idprod, String descripcion, String sku, String precio, String cantidad, String subfamilia, String estatus) {
         this.idprod = Long.valueOf(idprod);
         this.descripcion = descripcion;
@@ -22,7 +21,6 @@ public class Producto {
         this.estatus = estatus;
     }
 
-    // Getters
     public Long getIdprod() {
         return idprod;
     }
@@ -50,4 +48,5 @@ public class Producto {
     public String getEstatus() {
         return estatus;
     }
+
 }
