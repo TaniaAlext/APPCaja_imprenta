@@ -2,16 +2,9 @@ package com.example.myapplication;
 
 import android.os.Bundle;
 import android.view.View;
-
+import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class FormularioProductoActivity extends AppCompatActivity {
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_formulario_producto);
-    }
-    public void cancelarFormulario(View view) {
-        finish(); // Cierra esta actividad y regresa a la anterior
-    }
+
 }

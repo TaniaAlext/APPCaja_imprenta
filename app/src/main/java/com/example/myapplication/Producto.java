@@ -1,7 +1,9 @@
 package com.example.myapplication;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Producto {
-    private String clave;
+    private Long idprod;
     private String descripcion;
     private String sku;
     private String precio;
@@ -9,8 +11,8 @@ public class Producto {
     private String subfamilia;
     private String estatus;
 
-    public Producto(String clave, String descripcion, String sku, String precio, String cantidad, String subfamilia, String estatus) {
-        this.clave = clave;
+    public Producto(String idprod, String descripcion, String sku, String precio, String cantidad, String subfamilia, String estatus) {
+        this.idprod = Long.valueOf(idprod);
         this.descripcion = descripcion;
         this.sku = sku;
         this.precio = precio;
@@ -19,11 +21,32 @@ public class Producto {
         this.estatus = estatus;
     }
 
-    public String getClave() { return clave; }
-    public String getDescripcion() { return descripcion; }
-    public String getSku() { return sku; }
-    public String getPrecio() { return precio; }
-    public String getCantidad() { return cantidad; }
-    public String getSubfamilia() { return subfamilia; }
-    public String getEstatus() { return estatus; }
+    public Long getIdprod() {
+        return idprod;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public String getSku() {
+        return sku;
+    }
+
+    public String getPrecio() {
+        return precio;
+    }
+
+    public String getCantidad() {
+        return cantidad;
+    }
+
+    public String getSubfamilia() {
+        return subfamilia;
+    }
+
+    public String getEstatus() {
+        return estatus;
+    }
+
 }

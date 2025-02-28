@@ -6,6 +6,7 @@
     android:orientation="vertical"
     android:padding="8dp">
 
+    <!-- Barra de búsqueda -->
     <SearchView
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
@@ -15,15 +16,19 @@
         android:background="@android:drawable/edit_text"
         android:inputType="text" />
 
-    <Button
-        android:id="@+id/btnAgregarProducto"
+    <!-- Barra de carga -->
+    <ProgressBar
+        android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Agregar Nuevo Producto" />
+        android:layout_gravity="center"
+        android:visibility="gone" />
 
+    <!-- RecyclerView para mostrar la lista de productos -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp" />
+
 </LinearLayout>

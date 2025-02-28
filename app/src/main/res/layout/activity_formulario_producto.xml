@@ -24,19 +24,22 @@
             android:orientation="horizontal">
 
             <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Clave Abreviada"/>
-
-            <EditText
+                android:id="@+id/etDescripcion"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:hint="Descripción"/>
+
+            <EditText
+                android:id="@+id/etSku"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Clave Abreviada"/>
         </LinearLayout>
 
         <EditText
+            android:id="@+id/etDescripcionCorta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Descripción Corta"/>
@@ -56,12 +59,14 @@
             android:orientation="horizontal">
 
             <EditText
+                android:id="@+id/etSkuUnidad"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="SKU Unidad"/>
 
             <EditText
+                android:id="@+id/etSkuCaja"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -69,11 +74,13 @@
         </LinearLayout>
 
         <EditText
+            android:id="@+id/etPresentacionUnidad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Presentación por Unidad"/>
 
         <EditText
+            android:id="@+id/etPresentacionCaja"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Presentación por Caja"/>
@@ -93,12 +100,14 @@
             android:orientation="horizontal">
 
             <EditText
+                android:id="@+id/etCostoCaja"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="Costo Caja"/>
 
             <EditText
+                android:id="@+id/etCostoCajaIVA"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -111,12 +120,14 @@
             android:orientation="horizontal">
 
             <EditText
+                android:id="@+id/etStockMinimo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="Stock Mínimo"/>
 
             <EditText
+                android:id="@+id/etStockMaximo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -124,24 +135,10 @@
         </LinearLayout>
 
         <EditText
+            android:id="@+id/etTiempoEntrega"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Tiempo de Entrega (días)"/>
-
-        <!-- Sección de Imagen del Producto -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Imagen del Producto"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:paddingTop="16dp"/>
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:background="#DDDDDD"
-            android:contentDescription="Imagen del Producto"/>
 
         <!-- Botones de Acción -->
         <LinearLayout
@@ -161,7 +158,6 @@
                 android:layout_height="wrap_content"
                 android:text="Cancelar"
                 android:onClick="cancelarFormulario"/>
-
         </LinearLayout>
 
     </LinearLayout>

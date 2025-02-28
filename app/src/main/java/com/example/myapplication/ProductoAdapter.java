@@ -1,4 +1,5 @@
 package com.example.myapplication;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -6,17 +7,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHolder> {
+    private List<Producto> productos;
 
-    private List<Producto> listaProductos;
-    private List<Producto> listaProductosFull;
-
-    public ProductoAdapter(List<Producto> listaProductos) {
-        this.listaProductos = listaProductos;
-        this.listaProductosFull = new ArrayList<>(listaProductos);
+    public ProductoAdapter(List<Producto> productos) {
+        this.productos = productos;
     }
 
     @NonNull
@@ -28,52 +25,34 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Producto producto = listaProductos.get(position);
-        holder.txtClave.setText("Clave: " + producto.getClave());
-        holder.txtDescripcion.setText(producto.getDescripcion());
-        holder.txtSku.setText("SKU: " + producto.getSku());
-        holder.txtPrecio.setText("Precio: $" + producto.getPrecio());
-        holder.txtCantidad.setText("Cantidad: " + producto.getCantidad());
-        holder.txtSubfamilia.setText("Subfamilia: " + producto.getSubfamilia());
-        holder.txtEstatus.setText("Estatus: " + producto.getEstatus());
+        Producto producto = productos.get(position);
+        holder.idprod.setText("ID: " + producto.getIdprod());
+        holder.descripcion.setText("Descripción: " + producto.getDescripcion());
+        holder.sku1.setText("SKU: " + producto.getSku());
+        holder.precio.setText("Precio: $" + producto.getPrecio());
+        holder.cantidad.setText("Cantidad: " + producto.getCantidad());
+        holder.subfamilia.setText("Subfamilia: " + producto.getSubfamilia());
+        holder.estatus.setText("Estatus: " + producto.getEstatus());
     }
 
     @Override
     public int getItemCount() {
-        return listaProductos.size();
+        return productos.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtClave, txtDescripcion, txtSku, txtPrecio, txtCantidad, txtSubfamilia, txtEstatus;
-        CardView cardViewProducto;
+        TextView idprod, descripcion, sku1, precio, cantidad, subfamilia, estatus;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            cardViewProducto = itemView.findViewById(R.id.cardViewProducto);
-            txtClave = itemView.findViewById(R.id.txtClave);
-            txtDescripcion = itemView.findViewById(R.id.txtDescripcion);
-            txtSku = itemView.findViewById(R.id.txtSku);
-            txtPrecio = itemView.findViewById(R.id.txtPrecio);
-            txtCantidad = itemView.findViewById(R.id.txtCantidad);
-            txtSubfamilia = itemView.findViewById(R.id.txtSubfamilia);
-            txtEstatus = itemView.findViewById(R.id.txtEstatus);
+            idprod = itemView.findViewById(R.id.idprod);
+            descripcion = itemView.findViewById(R.id.descripcion);
+            sku1 = itemView.findViewById(R.id.sku1);
+            precio = itemView.findViewById(R.id.precio);
+            cantidad = itemView.findViewById(R.id.cantidad);
+            subfamilia = itemView.findViewById(R.id.subfamilia);
+            estatus = itemView.findViewById(R.id.estatus);
         }
-    }
-
-    public void filtrar(String texto) {
-        listaProductos.clear();
-        if (texto.isEmpty()) {
-            listaProductos.addAll(listaProductosFull);
-        } else {
-            texto = texto.toLowerCase();
-            for (Producto producto : listaProductosFull) {
-                if (producto.getClave().toLowerCase().contains(texto) ||
-                        producto.getDescripcion().toLowerCase().contains(texto) ||
-                        producto.getSku().toLowerCase().contains(texto)) {
-                    listaProductos.add(producto);
-                }
-            }
-        }
-        notifyDataSetChanged();
     }
 }
+

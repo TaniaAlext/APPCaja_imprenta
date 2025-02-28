@@ -2,7 +2,6 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cardViewProducto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
@@ -16,61 +15,63 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/txtClave"
+            android:id="@+id/idprod"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Clave del producto"
+            android:text="ID"
             android:textStyle="bold"
             android:textSize="18sp"
             android:textColor="@android:color/black" />
 
         <TextView
-            android:id="@+id/txtDescripcion"
+            android:id="@+id/descripcion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Descripción del producto"
+            android:text="Descripción"
             android:textSize="16sp"
             android:textColor="@android:color/darker_gray" />
-        <TextView
-            android:id="@+id/txtSku"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Skudel producto"
-            android:textSize="16sp"
-            android:textColor="@android:color/darker_gray"/>
 
         <TextView
-            android:id="@+id/txtPrecio"
+            android:id="@+id/sku1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Precio del producto"
+            android:text="SKU"
             android:textSize="16sp"
-            android:textColor="@android:color/darker_gray"/>
+            android:textColor="@android:color/darker_gray" />
 
         <TextView
-            android:id="@+id/txtCantidad"
+            android:id="@+id/precio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cantidad del producto"
+            android:text="Precio"
             android:textSize="16sp"
-            android:textColor="@android:color/darker_gray"/>
+            android:textColor="@android:color/holo_green_dark"
+            android:textStyle="bold" />
+
 
         <TextView
-            android:id="@+id/txtSubfamilia"
+            android:id="@+id/cantidad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Subfamilia del producto"
+            android:text="Cantidad"
             android:textSize="16sp"
-            android:textColor="@android:color/darker_gray"/>
+            android:textColor="@android:color/darker_gray" />
 
         <TextView
-            android:id="@+id/txtEstatus"
+            android:id="@+id/subfamilia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Estatus del producto"
+            android:text="Subfamilia"
             android:textSize="16sp"
-            android:textColor="@android:color/darker_gray"/>
+            android:textColor="@android:color/darker_gray" />
 
+        <TextView
+            android:id="@+id/estatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Estatus"
+            android:textSize="16sp"
+            android:textColor="@android:color/darker_gray" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
