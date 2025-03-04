@@ -1,35 +1,30 @@
 package com.example.myapplication;
 
+import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 public class ApiClient {
-    public static String insertarUsuario(String nombre, String email, String telefono, String pass) {
-        String urlString = "http://192.168.1.137:8080/app_m/insertar.php";
+    private static final String BASE_URL = "http://192.168.1.137:8080/app_m/";
+
+    public static ArrayList<Producto> obtenerProductos(int page, int pageSize) {
+        ArrayList<Producto> productos = new ArrayList<>();
         try {
+            // URL con parámetros de paginación
+            String urlString = BASE_URL + "mostrar.php?page=" + page + "&pageSize=" + pageSize;
             URL url = new URL(urlString);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setDoOutput(true);
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            conn.setRequestMethod("GET");
 
-            // Datos a enviar
-            String parametros = "nombre=" + URLEncoder.encode(nombre, "UTF-8") +
-                    "&email=" + URLEncoder.encode(email, "UTF-8") +
-                    "&telefono=" + URLEncoder.encode(telefono, "UTF-8") +
-                    "&pass=" + URLEncoder.encode(pass, "UTF-8");
-
-            // Enviar datos
-            OutputStream os = conn.getOutputStream();
-            os.write(parametros.getBytes());
-            os.flush();
-            os.close();
-
-            // Leer la respuesta
             BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             StringBuilder respuesta = new StringBuilder();
             String linea;
@@ -38,11 +33,27 @@ public class ApiClient {
             }
             reader.close();
 
-            return respuesta.toString();
+            Log.d("API", "Respuesta JSON: " + respuesta.toString());  // Agregar log aquí
 
+            // Convertir respuesta JSON en una lista de objetos Producto
+            JSONArray jsonArray = new JSONArray(respuesta.toString());
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject obj = jsonArray.getJSONObject(i);
+                Producto producto = new Producto(
+                        obj.getString("idprod"),
+                        obj.getString("descripcion"),
+                        obj.getString("sku"),
+                        obj.getString("precio"),
+                        obj.getString("cantidad"),
+                        obj.getString("subfamilia"),
+                        obj.getString("estatus")
+                );
+                productos.add(producto);
+            }
         } catch (Exception e) {
             e.printStackTrace();
-            return "Error al conectar con el servidor";
         }
+        return productos;
     }
 }
+
