@@ -1,20 +1,16 @@
 package com.example.myapplication;
 
 import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class ApiClient {
-    private static final String BASE_URL = "http://192.168.1.137:8080/app_m/";
+    private static final String BASE_URL = "http://192.168.1.92:8080/app_m/";
 
     public static ArrayList<Producto> obtenerProductos(int page, int pageSize) {
         ArrayList<Producto> productos = new ArrayList<>();
@@ -33,7 +29,7 @@ public class ApiClient {
             }
             reader.close();
 
-            Log.d("API", "Respuesta JSON: " + respuesta.toString());  // Agregar log aquí
+            Log.d("API", "Respuesta JSON: " + respuesta.toString());
 
             // Convertir respuesta JSON en una lista de objetos Producto
             JSONArray jsonArray = new JSONArray(respuesta.toString());
@@ -43,6 +39,8 @@ public class ApiClient {
                         obj.getString("idprod"),
                         obj.getString("descripcion"),
                         obj.getString("sku"),
+                        obj.getString("sku2"), // Nuevo campo
+                        obj.getString("descripabreviada"), // Nuevo campo
                         obj.getString("precio"),
                         obj.getString("cantidad"),
                         obj.getString("subfamilia"),
@@ -56,4 +54,3 @@ public class ApiClient {
         return productos;
     }
 }
-

@@ -1,164 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@android:color/white">
 
+    <!-- Contenedor principal -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="6dp"
+        app:cardCornerRadius="12dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:padding="16dp"
+        android:layout_marginBottom="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtIdProd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ID: "
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"/>
+
+            <TextView
+                android:id="@+id/txtDescripcion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Descripción: "
+                android:textSize="16sp"
+                android:textColor="@android:color/darker_gray"
+                android:layout_marginTop="8dp"/>
+
+            <!-- Contenedor SKU1 y SKU2 en la misma fila -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/txtSku"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="SKU: "
+                    android:textSize="16sp"
+                    android:textColor="@android:color/darker_gray"/>
+
+                <TextView
+                    android:id="@+id/txtSku2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="SKU2 "
+                    android:textSize="16sp"
+                    android:textColor="@android:color/darker_gray"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtDescripAbreviada"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Descripción Abreviada: "
+                android:textSize="16sp"
+                android:textColor="@android:color/darker_gray"
+                android:layout_marginTop="8dp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Botones de acción alineados al centro -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="8dp">
 
-        <!-- Sección de Información Básica -->
-        <TextView
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/btnEditar"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Información Básica"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:paddingBottom="8dp" />
+            android:layout_weight="1"
+            android:text="Editar"
+            android:textSize="16sp"
+            android:backgroundTint="#3F51B5"
+            android:textColor="@android:color/white"
+            android:layout_margin="4dp"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/btnAceptar"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_weight="1"
+            android:text="Aceptar"
+            android:textSize="16sp"
+            android:backgroundTint="#008799"
+            android:textColor="@android:color/white"
+            android:layout_margin="4dp"/>
 
-            <EditText
-                android:id="@+id/etDescripcion"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:hint="Descripción"/>
-
-            <EditText
-                android:id="@+id/etSku"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Clave Abreviada"/>
-        </LinearLayout>
-
-        <EditText
-            android:id="@+id/etDescripcionCorta"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Descripción Corta"/>
-
-        <!-- Sección de SKU y Presentación -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="SKU y Presentación"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:paddingTop="16dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/etSkuUnidad"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="SKU Unidad"/>
-
-            <EditText
-                android:id="@+id/etSkuCaja"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="SKU Caja"/>
-        </LinearLayout>
-
-        <EditText
-            android:id="@+id/etPresentacionUnidad"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Presentación por Unidad"/>
-
-        <EditText
-            android:id="@+id/etPresentacionCaja"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Presentación por Caja"/>
-
-        <!-- Sección de Precios y Stock -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Precios y Stock"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:paddingTop="16dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/etCostoCaja"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Costo Caja"/>
-
-            <EditText
-                android:id="@+id/etCostoCajaIVA"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Costo Caja con IVA"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/etStockMinimo"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Stock Mínimo"/>
-
-            <EditText
-                android:id="@+id/etStockMaximo"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Stock Máximo"/>
-        </LinearLayout>
-
-        <EditText
-            android:id="@+id/etTiempoEntrega"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Tiempo de Entrega (días)"/>
-
-        <!-- Botones de Acción -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="end"
-            android:paddingTop="16dp">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Aceptar"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cancelar"
-                android:onClick="cancelarFormulario"/>
-        </LinearLayout>
-
+            android:layout_weight="1"
+            android:text="Cancelar"
+            android:textSize="16sp"
+            android:backgroundTint="#CDDC39"
+            android:textColor="@android:color/white"
+            android:layout_margin="4dp"/>
     </LinearLayout>
-</ScrollView>
+
+</LinearLayout>

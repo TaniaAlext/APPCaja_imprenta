@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private ProductoAdapter productoAdapter;
     private List<Producto> productoList;
     private ProgressBar progressBar;
-    private static final String URL_PRODUCTOS = "http://192.168.1.137:8080/app_m/mostrar.php";
+    private static final String URL_PRODUCTOS = "http://192.168.1.92:8080/app_m/mostrar.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         productoList = new ArrayList<>();
-        productoAdapter = new ProductoAdapter(productoList);
+        productoAdapter = new ProductoAdapter(this,productoList);
         recyclerView.setAdapter(productoAdapter);
 
         obtenerProductos();
