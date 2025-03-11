@@ -1,16 +1,12 @@
 package com.example.myapplication;
 
 import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class ApiClient {
@@ -33,7 +29,7 @@ public class ApiClient {
             }
             reader.close();
 
-            Log.d("API", "Respuesta JSON: " + respuesta.toString());  // Agregar log aquí
+            Log.d("API", "Respuesta JSON: " + respuesta.toString());
 
             // Convertir respuesta JSON en una lista de objetos Producto
             JSONArray jsonArray = new JSONArray(respuesta.toString());
@@ -42,7 +38,9 @@ public class ApiClient {
                 Producto producto = new Producto(
                         obj.getString("idprod"),
                         obj.getString("descripcion"),
-                        obj.getString("sku"),
+                        obj.getString("sku1"),
+                        obj.getString("sku2"),
+                        obj.getString("descripabreviada"),
                         obj.getString("precio"),
                         obj.getString("cantidad"),
                         obj.getString("subfamilia"),
@@ -56,4 +54,3 @@ public class ApiClient {
         return productos;
     }
 }
-

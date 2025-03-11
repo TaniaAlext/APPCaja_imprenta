@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@android:color/white">
+
+    <EditText
+        android:id="@+id/edtIdProd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ID Producto"
+        android:inputType="number"
+        android:enabled="false"/>
+
+    <EditText
+        android:id="@+id/edtDescripcion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Descripción"/>
+
+    <EditText
+        android:id="@+id/edtSku1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="SKU"/>
+
+    <EditText
+        android:id="@+id/edtSku2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="SKU 2"/>
+
+
+    <EditText
+        android:id="@+id/edtDescripAbreviada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Descripción Abreviada"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <Button
+            android:id="@+id/btnGuardar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Guardar Cambios"
+            android:backgroundTint="#3F51B5"
+            android:textColor="@android:color/white"
+            android:layout_weight="1"
+            android:onClick="guardarCambios"/>
+
+        <Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Cancelar"
+            android:backgroundTint="#D32F2F"
+            android:textColor="@android:color/white"
+            android:layout_weight="1"
+            android:onClick="cancelarEdicion"/>
+    </LinearLayout>
+
+</LinearLayout>
