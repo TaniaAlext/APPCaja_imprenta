@@ -4,7 +4,7 @@ import java.io.Serializable;
 public class Producto implements Serializable {
     private Long idprod;
     private String descripcion;
-    private String sku;
+    private String sku1;
     private String sku2;
     private String descripabreviada;
     private String precio;
@@ -12,10 +12,10 @@ public class Producto implements Serializable {
     private String subfamilia;
     private String estatus;
 
-    public Producto(String idprod, String descripcion, String sku, String sku2, String descripabreviada, String precio, String cantidad, String subfamilia, String estatus) {
+    public Producto(String idprod, String descripcion, String sku1, String sku2, String descripabreviada, String precio, String cantidad, String subfamilia, String estatus) {
         this.idprod = Long.valueOf(idprod);
         this.descripcion = descripcion;
-        this.sku = sku;
+        this.sku1 = sku1;
         this.sku2 = sku2;
         this.descripabreviada = descripabreviada;
         this.precio = precio;
@@ -32,8 +32,8 @@ public class Producto implements Serializable {
         return descripcion;
     }
 
-    public String getSku() {
-        return sku;
+    public String getSku1() {
+        return sku1;
     }
 
     public String getSku2() {
@@ -59,4 +59,9 @@ public class Producto implements Serializable {
     public String getEstatus() {
         return estatus;
     }
+
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+    public void setSku1(String sku1) { this.sku1 = sku1; }
+    public void setSku2(String sku2) { this.sku2 = sku2; }
+    public void setDescripabreviada(String descripabreviada) { this.descripabreviada = descripabreviada; }
 }

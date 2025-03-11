@@ -34,7 +34,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
 
         holder.txtIdProd.setText("ID: " + producto.getIdprod());
         holder.txtDescripcion.setText("Descripción: " + producto.getDescripcion());
-        holder.txtSku.setText("SKU: " + producto.getSku());
+        holder.txtSku1.setText("SKU: " + producto.getSku1());
         holder.txtSku2.setText("SKU2: " + producto.getSku2());
         holder.txtPrecio.setText("Precio: " + producto.getPrecio());
         holder.txtCantidad.setText("Cantidad: " + producto.getCantidad());
@@ -55,13 +55,13 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
     }
 
     public static class ProductoViewHolder extends RecyclerView.ViewHolder {
-        TextView txtIdProd, txtDescripcion, txtSku, txtSku2, txtPrecio, txtCantidad, txtEstatus, txtSubfamilia;
+        TextView txtIdProd, txtDescripcion, txtSku1, txtSku2, txtPrecio, txtCantidad, txtEstatus, txtSubfamilia;
 
         public ProductoViewHolder(@NonNull View itemView) {
             super(itemView);
             txtIdProd = itemView.findViewById(R.id.idprod);
             txtDescripcion = itemView.findViewById(R.id.descripcion);
-            txtSku = itemView.findViewById(R.id.sku1);
+            txtSku1 = itemView.findViewById(R.id.sku1);
             txtSku2 = itemView.findViewById(R.id.sku2);
             txtPrecio = itemView.findViewById(R.id.precio);
             txtCantidad = itemView.findViewById(R.id.cantidad);

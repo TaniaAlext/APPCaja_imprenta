@@ -7,8 +7,12 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -26,7 +30,10 @@ public class MainActivity extends AppCompatActivity {
     private ProductoAdapter productoAdapter;
     private List<Producto> productoList;
     private ProgressBar progressBar;
-    private static final String URL_PRODUCTOS = "http://192.168.1.92:8080/app_m/mostrar.php";
+    private RequestQueue queue;
+    private ProductoViewModel productoViewModel;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private static final String URL_PRODUCTOS = "http://192.168.1.137:8080/app_m/mostrar.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,19 +42,50 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
         progressBar = findViewById(R.id.progressBar);
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         productoList = new ArrayList<>();
-        productoAdapter = new ProductoAdapter(this,productoList);
+        productoAdapter = new ProductoAdapter(this, productoList);
         recyclerView.setAdapter(productoAdapter);
 
-        obtenerProductos();
+        productoViewModel = new ViewModelProvider(this).get(ProductoViewModel.class);
+        queue = Volley.newRequestQueue(this);
+        progressBar.setVisibility(View.VISIBLE);
+
+        productoViewModel.getProductos().observe(this, productos -> {
+            if (productos != null && !productos.isEmpty()) {
+                productoList.clear();
+                productoList.addAll(productos);
+                productoAdapter.notifyDataSetChanged();
+            }
+            progressBar.setVisibility(View.GONE);
+        });
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        productoViewModel.cargarProductos(queue);
+
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            progressBar.setVisibility(View.VISIBLE);
+            productoViewModel.cargarProductos(queue);
+            swipeRefreshLayout.setRefreshing(false);
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (queue == null) {
+            queue = Volley.newRequestQueue(this);
+        }
+        productoViewModel.cargarProductos(queue);
     }
 
     private void obtenerProductos() {
         progressBar.setVisibility(View.VISIBLE);
 
         RequestQueue queue = Volley.newRequestQueue(this);
+
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, URL_PRODUCTOS, null,
                 new Response.Listener<org.json.JSONArray>() {
                     @Override
@@ -75,4 +113,17 @@ public class MainActivity extends AppCompatActivity {
 
         queue.add(request);
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
+            Producto productoActualizado = (Producto) data.getSerializableExtra("producto");
+
+            if (productoActualizado != null) {
+                productoViewModel.cargarProductos(queue);
+            }
+        }
+    }
+
 }

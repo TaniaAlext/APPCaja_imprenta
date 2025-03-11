@@ -22,7 +22,7 @@
         android:hint="Descripción"/>
 
     <EditText
-        android:id="@+id/edtSku"
+        android:id="@+id/edtSku1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="SKU"/>
@@ -40,20 +40,38 @@
         android:layout_height="wrap_content"
         android:hint="Descripción Abreviada"/>
 
-    <Button
-        android:id="@+id/btnGuardar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Guardar Cambios"
-        android:backgroundTint="#3F51B5"
-        android:textColor="@android:color/white"
-        android:layout_marginTop="8dp"/>
-
-    <Button
-        android:id="@+id/btnCancelar"
+    <ProgressBar
+        android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cancelar"
-        android:onClick="cancelarEdicion"/>
+        android:visibility="gone"
+        android:layout_gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <Button
+            android:id="@+id/btnGuardar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Guardar Cambios"
+            android:backgroundTint="#3F51B5"
+            android:textColor="@android:color/white"
+            android:layout_weight="1"
+            android:onClick="guardarCambios"/>
+
+        <Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Cancelar"
+            android:backgroundTint="#D32F2F"
+            android:textColor="@android:color/white"
+            android:layout_weight="1"
+            android:onClick="cancelarEdicion"/>
+    </LinearLayout>
 
 </LinearLayout>

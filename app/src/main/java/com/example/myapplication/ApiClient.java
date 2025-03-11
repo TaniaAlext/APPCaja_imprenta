@@ -10,7 +10,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class ApiClient {
-    private static final String BASE_URL = "http://192.168.1.92:8080/app_m/";
+    private static final String BASE_URL = "http://192.168.1.137:8080/app_m/";
 
     public static ArrayList<Producto> obtenerProductos(int page, int pageSize) {
         ArrayList<Producto> productos = new ArrayList<>();
@@ -38,9 +38,9 @@ public class ApiClient {
                 Producto producto = new Producto(
                         obj.getString("idprod"),
                         obj.getString("descripcion"),
-                        obj.getString("sku"),
-                        obj.getString("sku2"), // Nuevo campo
-                        obj.getString("descripabreviada"), // Nuevo campo
+                        obj.getString("sku1"),
+                        obj.getString("sku2"),
+                        obj.getString("descripabreviada"),
                         obj.getString("precio"),
                         obj.getString("cantidad"),
                         obj.getString("subfamilia"),

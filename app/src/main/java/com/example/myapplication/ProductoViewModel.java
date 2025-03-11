@@ -1,0 +1,82 @@
+package com.example.myapplication;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class ProductoViewModel extends ViewModel {
+    private MutableLiveData<List<Producto>> productosLiveData = new MutableLiveData<>();
+    private MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
+
+    public LiveData<List<Producto>> getProductos() {
+        return productosLiveData;
+    }
+
+    public LiveData<Boolean> getIsLoading() {
+        return isLoading;
+    }
+
+    public void cargarProductos(RequestQueue queue) {
+        String URL_PRODUCTOS = "http://192.168.1.137:8080/app_m/mostrar.php";
+
+        isLoading.setValue(true);
+
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, URL_PRODUCTOS, null,
+                new Response.Listener<org.json.JSONArray>() {
+                    @Override
+                    public void onResponse(org.json.JSONArray response) {
+                        Gson gson = new Gson();
+                        Type listType = new TypeToken<List<Producto>>() {}.getType();
+                        List<Producto> productos = gson.fromJson(response.toString(), listType);
+
+                        productosLiveData.setValue(productos);
+                        isLoading.setValue(false);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        isLoading.setValue(false);
+                    }
+                });
+
+        queue.add(request);
+    }
+
+    public void actualizarProducto(RequestQueue queue, Producto productoActualizado) {
+        String URL_ACTUALIZAR_PRODUCTO = "http://192.168.1.137:8080/app_m/editar.php";
+
+        StringRequest request = new StringRequest(Request.Method.POST, URL_ACTUALIZAR_PRODUCTO,
+                response -> {
+                     cargarProductos(queue);
+                },
+                error -> {
+                    // Manejar el error
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("idprod", String.valueOf(productoActualizado.getIdprod()));
+                params.put("descripcion", productoActualizado.getDescripcion());
+                params.put("sku1", productoActualizado.getSku1());
+                params.put("sku2", productoActualizado.getSku2());
+                params.put("descripabreviada", productoActualizado.getDescripabreviada());
+                return params;
+            }
+        };
+
+        queue.add(request);
+    }
+}
