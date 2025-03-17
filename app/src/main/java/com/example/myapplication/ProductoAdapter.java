@@ -54,6 +54,11 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
         return productos.size();
     }
 
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
+        notifyDataSetChanged();
+    }
+
     public static class ProductoViewHolder extends RecyclerView.ViewHolder {
         TextView txtIdProd, txtDescripcion, txtSku1, txtSku2, txtPrecio, txtCantidad, txtEstatus, txtSubfamilia;
 

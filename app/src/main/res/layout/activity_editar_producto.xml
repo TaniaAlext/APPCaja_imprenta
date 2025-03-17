@@ -33,6 +33,13 @@
         android:layout_height="wrap_content"
         android:hint="SKU 2"/>
 
+    <Button
+        android:id="@+id/btnEscanearSku2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Escanear Código"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="8dp"/>
 
     <EditText
         android:id="@+id/edtDescripAbreviada"
