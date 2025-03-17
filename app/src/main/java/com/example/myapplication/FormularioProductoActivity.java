@@ -6,11 +6,12 @@ import android.widget.TextView;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
 public class FormularioProductoActivity extends AppCompatActivity {
-    private TextView txtIdProd, txtDescripcion, txtSku, txtDescripAbreviada;
+    private TextView txtIdProd, txtDescripcion, txtSku, txtSku2, txtDescripAbreviada;
     private Button btnEditar, btnCancelar;
     private Producto producto;
 
@@ -19,27 +20,25 @@ public class FormularioProductoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_producto);
 
-        // Inicializar vistas
         txtIdProd = findViewById(R.id.txtIdProd);
         txtDescripcion = findViewById(R.id.txtDescripcion);
         txtSku = findViewById(R.id.txtSku);
+        txtSku2 = findViewById(R.id.txtSku2);
         txtDescripAbreviada = findViewById(R.id.txtDescripAbreviada);
         btnEditar = findViewById(R.id.btnEditar);
         btnCancelar = findViewById(R.id.btnCancelar);
 
-        // Obtener datos enviados desde la lista
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra("producto")) {
             producto = (Producto) intent.getSerializableExtra("producto");
 
-            // Mostrar la información en los TextView
             txtIdProd.setText("ID: " + producto.getIdprod());
             txtDescripcion.setText("Descripción: " + producto.getDescripcion());
             txtSku.setText("SKU: " + producto.getSku1());
+            txtSku2.setText("SKU2: "+ producto.getSku2());
             txtDescripAbreviada.setText("Descripción. Abreviada: " + producto.getDescripabreviada());
         }
 
-        // Botón Editar: Abrir nueva actividad para editar
         btnEditar.setOnClickListener(v -> {
             Intent intentEditar = new Intent(FormularioProductoActivity.this, EditarProductoActivity.class);
             intentEditar.putExtra("producto", producto);
@@ -61,18 +60,15 @@ public class FormularioProductoActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
-            Producto productoActualizado = (Producto) data.getSerializableExtra("producto");
+            txtIdProd.setText("ID: " + data.getStringExtra("idprod"));
+            txtDescripcion.setText("Descripción: " + data.getStringExtra("descripcion"));
+            txtSku.setText("SKU: " + data.getStringExtra("sku1"));
+            txtSku2.setText("SKU2: " + data.getStringExtra("sku2"));
+            txtDescripAbreviada.setText("Descripción. Abreviada: " + data.getStringExtra("descripabreviada"));
 
-            if (productoActualizado != null) {
-                this.producto = productoActualizado;
-
-                // Redirigir a la lista de productos
-                Intent intentListaProductos = new Intent(FormularioProductoActivity.this, MainActivity.class);
-                intentListaProductos.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intentListaProductos);
-                finish();
-            }
+            Toast.makeText(this, "Datos actualizados", Toast.LENGTH_SHORT).show();
         }
     }
+
 
 }

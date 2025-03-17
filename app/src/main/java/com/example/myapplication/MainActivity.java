@@ -45,28 +45,30 @@ public class MainActivity extends AppCompatActivity {
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        productoList = new ArrayList<>();
-        productoAdapter = new ProductoAdapter(this, productoList);
+        productoAdapter = new ProductoAdapter(this, new ArrayList<>());
         recyclerView.setAdapter(productoAdapter);
 
-        productoViewModel = new ViewModelProvider(this).get(ProductoViewModel.class);
         queue = Volley.newRequestQueue(this);
-        progressBar.setVisibility(View.VISIBLE);
+        productoViewModel = new ViewModelProvider(this).get(ProductoViewModel.class);
 
-        productoViewModel.getProductos().observe(this, productos -> {
-            if (productos != null && !productos.isEmpty()) {
-                productoList.clear();
-                productoList.addAll(productos);
-                productoAdapter.notifyDataSetChanged();
+        productoViewModel.getProductos().observe(this, new Observer<List<Producto>>() {
+            @Override
+            public void onChanged(List<Producto> productos) {
+                if (productos != null) {
+                    productoAdapter.setProductos(productos);
+                    productoAdapter.notifyDataSetChanged();
+                }
+                progressBar.setVisibility(View.GONE);
             }
-            progressBar.setVisibility(View.GONE);
         });
 
-        RequestQueue queue = Volley.newRequestQueue(this);
+        productoViewModel.getIsLoading().observe(this, isLoading -> {
+            progressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);
+        });
+
         productoViewModel.cargarProductos(queue);
 
         swipeRefreshLayout.setOnRefreshListener(() -> {
-            progressBar.setVisibility(View.VISIBLE);
             productoViewModel.cargarProductos(queue);
             swipeRefreshLayout.setRefreshing(false);
         });
@@ -75,10 +77,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (queue == null) {
-            queue = Volley.newRequestQueue(this);
+        if (productoList == null || productoList.isEmpty()) {
+            productoViewModel.cargarProductos(queue);
         }
-        productoViewModel.cargarProductos(queue);
     }
 
     private void obtenerProductos() {
