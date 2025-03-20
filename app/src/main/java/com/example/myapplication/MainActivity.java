@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private RequestQueue queue;
     private ProductoViewModel productoViewModel;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private static final String URL_PRODUCTOS = "http://192.168.1.137:8080/app_m/mostrar.php";
+    private static final String URL_PRODUCTOS = "https://avisoft.lol/mostrar.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

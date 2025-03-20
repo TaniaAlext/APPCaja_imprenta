@@ -30,7 +30,7 @@ public class EditarProductoActivity extends AppCompatActivity {
     private Button btnGuardar, btnCancelarEdicion;
     private Producto producto;
     private ProgressBar progressBar;
-    private static final String URL_PRODUCTOS = "http://192.168.1.137:8080/app_m/editar.php";
+    private static final String URL_PRODUCTOS = "https://avisoft.lol/editar.php";
 
     private Button btnEscanearSku2;
     private final ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(

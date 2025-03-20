@@ -26,7 +26,7 @@ public class ProductoViewModel extends ViewModel {
     }
 
     public void cargarProductos(RequestQueue queue) {
-        String URL_PRODUCTOS = "http://192.168.1.137:8080/app_m/mostrar.php";
+        String URL_PRODUCTOS = "https://avisoft.lol/mostrar.php";
         isLoading.setValue(true);
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, URL_PRODUCTOS, null,
