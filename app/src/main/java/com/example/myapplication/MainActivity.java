@@ -28,12 +28,12 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ProductoAdapter productoAdapter;
-    private List<Producto> productoList;
+    private List<Producto> productoList = new ArrayList<>();
     private ProgressBar progressBar;
     private RequestQueue queue;
     private ProductoViewModel productoViewModel;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private static final String URL_PRODUCTOS = "http://192.168.1.137:8080/app_m/mostrar.php";
+    private static final String URL_PRODUCTOS = "https://avisoft.lol/mostrar.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,17 +45,24 @@ public class MainActivity extends AppCompatActivity {
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        productoAdapter = new ProductoAdapter(this, new ArrayList<>());
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setItemViewCacheSize(20);
+
+        productoAdapter = new ProductoAdapter(this, productoList);
         recyclerView.setAdapter(productoAdapter);
 
+        // Instancia única de Volley
         queue = Volley.newRequestQueue(this);
+
+        // Inicializar ViewModel
         productoViewModel = new ViewModelProvider(this).get(ProductoViewModel.class);
 
         productoViewModel.getProductos().observe(this, new Observer<List<Producto>>() {
             @Override
             public void onChanged(List<Producto> productos) {
-                if (productos != null) {
-                    productoAdapter.setProductos(productos);
+                if (productos != null && !productos.isEmpty()) {
+                    productoList.clear();
+                    productoList.addAll(productos);
                     productoAdapter.notifyDataSetChanged();
                 }
                 progressBar.setVisibility(View.GONE);
@@ -66,7 +73,10 @@ public class MainActivity extends AppCompatActivity {
             progressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);
         });
 
-        productoViewModel.cargarProductos(queue);
+        // Verificar si la lista está vacía antes de volver a cargar
+        if (productoList.isEmpty()) {
+            productoViewModel.cargarProductos(queue);
+        }
 
         swipeRefreshLayout.setOnRefreshListener(() -> {
             productoViewModel.cargarProductos(queue);
@@ -77,15 +87,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (productoList == null || productoList.isEmpty()) {
+        // Evitar cargas innecesarias
+        if (productoList.isEmpty()) {
             productoViewModel.cargarProductos(queue);
         }
     }
 
     private void obtenerProductos() {
         progressBar.setVisibility(View.VISIBLE);
-
-        RequestQueue queue = Volley.newRequestQueue(this);
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, URL_PRODUCTOS, null,
                 new Response.Listener<org.json.JSONArray>() {
@@ -98,9 +107,11 @@ public class MainActivity extends AppCompatActivity {
                         Type listType = new TypeToken<List<Producto>>() {}.getType();
                         List<Producto> productos = gson.fromJson(response.toString(), listType);
 
-                        productoList.clear();
-                        productoList.addAll(productos);
-                        productoAdapter.notifyDataSetChanged();
+                        if (productos != null) { // Evitar NullPointerException
+                            productoList.clear();
+                            productoList.addAll(productos);
+                            productoAdapter.notifyDataSetChanged();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -112,8 +123,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+        // Habilitar caché en la solicitud para optimizar la carga
+        request.setShouldCache(true);
         queue.add(request);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -126,5 +140,4 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
 }
